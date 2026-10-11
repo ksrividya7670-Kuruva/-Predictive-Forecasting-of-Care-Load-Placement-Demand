@@ -839,21 +839,62 @@ with tabs[6]:
     
     st.dataframe(df_continuous, use_container_width=True)
     
-    csv_data = df_continuous.to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label="📥 Download Continuous Daily UAC Dataset (CSV)",
-        data=csv_data,
-        file_name="uac_daily_continuous_dataset.csv",
-        mime="text/csv"
-    )
+    col_dl1, col_dl2 = st.columns(2)
+    with col_dl1:
+        csv_data = df_continuous.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="📥 Download Continuous Daily UAC Dataset (CSV)",
+            data=csv_data,
+            file_name="uac_daily_continuous_dataset.csv",
+            mime="text/csv"
+        )
+    with col_dl2:
+        fc_csv = prim_fc_df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label=f"📥 Download Forward Forecasts ({primary_key}) (CSV)",
+            data=fc_csv,
+            file_name="uac_forward_forecasts.csv",
+            mime="text/csv"
+        )
+
+    st.markdown("### 📄 Research Deliverables Downloads")
+    p_col1, p_col2, p_col3 = st.columns(3)
     
-    fc_csv = prim_fc_df.to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label=f"📥 Download Forward Forecasts ({primary_key}) (CSV)",
-        data=fc_csv,
-        file_name="uac_forward_forecasts.csv",
-        mime="text/csv"
-    )
+    paper_md_path = os.path.join(BASE_DIR, 'deliverables', 'RESEARCH_PAPER.md')
+    if os.path.exists(paper_md_path):
+        with open(paper_md_path, 'r', encoding='utf-8') as f:
+            paper_md_content = f.read()
+        with p_col1:
+            st.download_button(
+                label="📄 Download Research Paper (.md)",
+                data=paper_md_content,
+                file_name="RESEARCH_PAPER.md",
+                mime="text/markdown"
+            )
+            
+    paper_html_path = os.path.join(BASE_DIR, 'deliverables', 'RESEARCH_PAPER.html')
+    if os.path.exists(paper_html_path):
+        with open(paper_html_path, 'r', encoding='utf-8') as f:
+            paper_html_content = f.read()
+        with p_col2:
+            st.download_button(
+                label="🌐 Download Research Paper (.html / PDF Print)",
+                data=paper_html_content,
+                file_name="RESEARCH_PAPER.html",
+                mime="text/html"
+            )
+            
+    exec_md_path = os.path.join(BASE_DIR, 'deliverables', 'EXECUTIVE_SUMMARY.md')
+    if os.path.exists(exec_md_path):
+        with open(exec_md_path, 'r', encoding='utf-8') as f:
+            exec_md_content = f.read()
+        with p_col3:
+            st.download_button(
+                label="📋 Download Executive Summary (.md)",
+                data=exec_md_content,
+                file_name="EXECUTIVE_SUMMARY.md",
+                mime="text/markdown"
+            )
 
 # Footer
 st.markdown("---")
