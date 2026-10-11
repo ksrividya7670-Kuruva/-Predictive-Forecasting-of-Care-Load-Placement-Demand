@@ -1,0 +1,7 @@
+Model,MAE,RMSE,MAPE,sMAPE,R2,Forecast Accuracy (%),Stability Index (Std MAE)
+SARIMA,40.56,49.46,1.83,1.86,-0.785,98.17,23.77
+Gradient Boosting,46.46,57.19,2.02,2.06,-1.6948,97.98,22.74
+Random Forest,55.79,67.12,2.46,2.5,-2.439,97.54,23.66
+Naive Persistence,57.16,68.61,2.52,2.58,-2.4368,97.48,17.36
+7-Day Moving Average,70.44,80.34,3.11,3.18,-3.8666,96.89,14.86
+Holt-Winters,177.76,200.05,8.1,8.14,-45.0411,91.9,126.91
